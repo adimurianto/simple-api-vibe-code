@@ -2,6 +2,8 @@ import { Elysia } from 'elysia';
 import { db } from './db';
 import { users } from './db/schema';
 
+import { usersRoute } from './routes/users-route';
+
 const app = new Elysia()
   .get('/', () => ({ status: 'ok', message: 'Elysia + Drizzle + MySQL is running' }))
   .get('/users', async () => {
@@ -12,6 +14,7 @@ const app = new Elysia()
       return { error: 'Failed to fetch users. Is the database connected?' };
     }
   })
+  .use(usersRoute)
   .listen(3000);
 
 console.log(
